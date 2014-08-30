@@ -12,7 +12,7 @@ module.exports = (grunt) ->
       gruntfile:
         files: [ 'Gruntfile.coffee' ]
       coffee:
-        files: [ '/src/{,*/}*.coffee' ]
+        files: [ 'src/{,*/}*.coffee' ]
         tasks: [ 'coffee:dist' ]
       # TODO: add files if necessary
     }
@@ -97,6 +97,7 @@ module.exports = (grunt) ->
 
     concurrent: {
       server: [
+        'coffee:dist'
         'sass:server',
         'copy:styles'
       ],
@@ -114,7 +115,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'serve', (target) ->
     grunt.task.run [
-      'coffee:dist'
       'clean:server'
       'concurrent:server'
       'connect:livereload'
